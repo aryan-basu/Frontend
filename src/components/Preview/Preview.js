@@ -42,7 +42,7 @@ const Preview = () => {
         })
 
 
-        Axios.get('http://localhost:5000/join').then( res => {
+        Axios.get('https://pclub-meet-backend.herokuapp.com/join').then( res => {
             setroomId(res.data.link)
             const inputLink = document.getElementById('input-with-icon-adornment text')    
             inputLink.value = res.data.link
