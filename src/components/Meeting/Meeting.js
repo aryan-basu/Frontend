@@ -2,9 +2,20 @@ import React, { useEffect, useRef, useState } from 'react';
 import './Meeting.css'
 import Peer from 'peerjs';
 import { io } from 'socket.io-client';
+import firebase from 'firebase';
+import { useHistory } from 'react-router-dom';
 
 const Meeting = (props) => {
-    //states
+   
+
+    //firebase
+    const history = useHistory();
+    var user = firebase.auth().currentUser;
+    if(user===null)
+    {
+      history.push('/');
+    }
+      //states
     const [peers, setPeers] = useState({})
     const [myId, setMyId] = useState('');
 
@@ -19,6 +30,7 @@ const Meeting = (props) => {
         video.addEventListener('loadedmetadata', () => {
             video.play()
         })
+        if(videoGrid.current)
         videoGrid.current.append(video);
     }
 

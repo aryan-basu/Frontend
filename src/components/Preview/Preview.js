@@ -13,15 +13,24 @@ import Button from '@material-ui/core/Button'
 import styled from "styled-components";
 import Axios from 'axios';
 import { useHistory } from 'react-router-dom';
+import firebase from 'firebase';
 
 
 
 const Preview = () => {
+
     //states & ref's
     const history = useHistory();
     const [roomId, setroomId] = useState('');
     const myVideo = useRef()
+ 
 
+    //firebase
+    var user = firebase.auth().currentUser;
+    if(user===null)
+    {
+      history.push('/');
+    }
     //initial mounting
     useEffect(() => {
         
