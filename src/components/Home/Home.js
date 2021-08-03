@@ -10,7 +10,7 @@ import { useHistory } from 'react-router-dom';
 import firebase from 'firebase';
 const Home = (props) => {
 
-
+    let textInput = React.createRef();
     var user = firebase.auth().currentUser;
     var fullname, email;
     if (user !== null) {
@@ -24,23 +24,20 @@ const Home = (props) => {
         history.push("/");
     };
 
+    function handlejoin() {
+     const code=textInput.current.value;
+     if(code!=null)
+     {
+         history.push('/meeting/'+code)
+     }
+      }
     return (
         <div>
             <div className="home">
                 <h4>Welcome {fullname} !</h4>
-                <TextField
-                    placeholder='Enter meeting code'
-                    id="outlined-start-adornment"
-                    InputProps={{
-                        endAdornment:
-                            <InputAdornment position="end">
-                                <IconButton className='input-btn'>
-                                    <AiOutlineArrowRight className='input-icons' />
-                                </IconButton>
-                            </InputAdornment>,
-                    }}
-                    variant="outlined"
-                />
+         
+                <input type="text" ref={textInput} placeholder="Enter Meeting code" /> 
+                <button onClick={handlejoin}>Join meet</button>
                 <div className='lines'>
                     <div className='line-1'></div>
                     <p>or</p>
